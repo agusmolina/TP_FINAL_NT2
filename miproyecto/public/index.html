@@ -5,36 +5,49 @@
 <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
 
 <link rel="stylesheet" type="text/css" href="estilo.css">
+<link rel="stylesheet" type="text/css" href="Animated.css">
 </head>
 <body>
+
   <div id="main">  
 <form  v-cloak>
 
     <div class="bar">
+        <ul id="minav">
+            <li>
+                <a>HOME</a>
+            </li>
+            <li>
+                <a>ESTRENOS</a>
+            </li>
+            <li>
+               <a>PELICULAS</a>
+         </li>
+        </ul>
         <a class="list-icon" v-bind:class="{ 'active': layout == 'list'}" v-on:click="layout = 'list'"></a>
         <a class="grid-icon" v-bind:class="{ 'active': layout == 'grid'}" v-on:click="layout = 'grid'"></a>
     </div>
 
    
     <ul v-if="layout == 'grid'" class="grid">
-       
         <li v-for="a in articles">
             <a v-bind:href="a.url" target="_blank"><img v-bind:src="a.image.large" /></a>
         </li>
     </ul>
 
     <ul v-if="layout == 'list'" class="list">
-      
         <li v-for="a in articles">
-            <a v-bind:href="a.url" target="_blank"><img v-bind:src="a.image.small" /></a>
-            <p>{{a.title}}</p>
+            <div class="fadeInDown animated">
+                    <a v-bind:href="a.url" target="_blank"><img v-bind:src="a.image.small" /></a>
+                    <p class="titulo">{{a.title}}</p>
+            </div>
+          
         </li>
     </ul>
 
 </form>
 <script type="text/javascript" src="logica-index.js"></script>
 </div>
-
 </body>
 
 </html>

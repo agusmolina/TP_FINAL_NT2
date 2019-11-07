@@ -11,6 +11,7 @@
       font:15px/1.3 'Open Sans', sans-serif;
       color: #5e5b64;
       text-align:center;
+      background: image("\images\preview-61144IYUSINCf30-low_0010.jpg");
   }
   
   a, a:visited {
@@ -39,13 +40,40 @@
   
       box-shadow: 0 1px 1px #ccc;
       border-radius: 2px;
-      width: 580px;
+      width: 80%;
       padding: 10px;
       margin: 45px auto 25px;
       position:relative;
       text-align:right;
-      line-height: 1;
+      line-height: 2;
   }
+
+#minav{
+    float: left;
+}
+
+  #minav li {
+    list-style-type: none;
+    display: inline;
+    padding-left: 18px;
+    padding-top:15px;
+    background-color: none;
+
+  }
+  #minav li a{
+      display: inline;
+      color: white;
+      font-size:16px;
+      background: none;
+      font-weight: bold;
+
+  }
+  #minav li:hover{
+    transition: all 1s ease;
+  }
+  #minav li a:hover{
+  transition: all 1s ease;
+}
   
   .bar a{
       background:#4987a1 center center no-repeat;
@@ -88,6 +116,11 @@
       outline: none;
       text-indent: 40px;
   }
+
+  .titulo {
+      font-size: 22px;
+      padding-left: 120px;
+  }
   
   /*-------------------------
       List layout
@@ -95,7 +128,7 @@
   
   ul.list{
       list-style: none;
-      width: 500px;
+      width: 80%;
       margin: 0 auto;
       text-align: left;
   }
@@ -107,11 +140,16 @@
   }
   
   ul.list li img{
-      width:120px;
-      height:120px;
+      width:240px;
+      height:280px;
       float:left;
       border:none;
+      border-radius: 8px;
+      
   }
+  ul.list li img:hover{
+    -webkit-transform: scale(1.01);
+}
   
   ul.list li p{
       margin-left: 135px;
@@ -125,7 +163,7 @@
   
   ul.grid{
       list-style: none;
-      width: 570px;
+      width: 80%;
       margin: 0 auto;
       text-align: left;
   }
@@ -141,4 +179,9 @@
       object-fit: cover;
       display:block;
       border:none;
+      border-radius: 8px;
+  }
+
+  ul.grid li img:hover{
+      -webkit-transform: scale(1.01);
   }
