@@ -7,11 +7,10 @@
 <link rel="stylesheet" type="text/css" href="estilo.css">
 <link rel="stylesheet" type="text/css" href="Animated.css">
 </head>
-<body>
+<body background="https://cdn.24.co.za/files/Cms/General/d/8033/07653b2c234b4b538c23909d7fd70011.jpg">
 
   <div id="main">  
 <form  v-cloak>
-
     <div class="bar">
         <ul id="minav">
             <li>
@@ -31,15 +30,19 @@
    
     <ul v-if="layout == 'grid'" class="grid">
         <li v-for="a in articles">
-            <a v-bind:href="a.url" target="_blank"><img v-bind:src="a.image.large" /></a>
+            <a v-bind:href="a.trailer" target="_blank"><img v-bind:src="a.poster_path" /></a>
         </li>
     </ul>
 
-    <ul v-if="layout == 'list'" class="list">
+    <ul v-if="layout == 'list'" class="list" style="background-color: rgba(0, 0, 0, 0.7)">
         <li v-for="a in articles">
-            <div class="fadeInDown animated">
-                    <a v-bind:href="a.url" target="_blank"><img v-bind:src="a.image.small" /></a>
-                    <p class="titulo">{{a.title}}</p>
+            <div class="fadeInDown animated"> 
+                    <a v-bind:href="a.trailer" target="_blank"><img v-bind:src="a.poster_path" /></a>
+                    <p class="titulo" style="color: white">{{a.title}}</p>
+                    <p class="titulo" style="color: white">Puntaje: {{a.vote_average}}</p>
+                    <p class="titulo" style="color: white">Fecha de Estreno: {{a.release_date}}</p>
+                    <br>
+                    <p style="color: white; font-size: 18px; padding-left: 150px;">{{a.overview}}</p>
             </div>
           
         </li>
