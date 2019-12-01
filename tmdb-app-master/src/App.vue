@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <navigation></navigation>
+    
     <header class="header">
+      <navigation></navigation>
       <div class="header__search">
         <input class="header__search-input" type="text" v-model.trim="searchQuery" @keyup.enter="search" @blur="search" placeholder="Buscar pelicula...">
         <svg class="header__search-icon">
@@ -187,29 +188,27 @@ img{
 }
 .header{
   position: fixed;
-  background: rgba(#fff, 0.5);
-  z-index: 15;
-  display: flex;
+  background: rgba($c-dark, 0.5);
+  height: 100px;
+  padding-top: 25px;
+  padding-left: 550px;
+
+  z-index: 10;
   @include tablet-min{
-    width: calc(100% - 170px);
-    height: 75px;
-    margin-left: 95px;
+    width: 100%;
     border-top: 0;
     border-bottom: 0;
     top: 0;
   }
   &__search{
     height: 50px;
-    display: flex;
-    position: relative;
     z-index: 5;
-    width: calc(100% - 110px);
-    position: fixed;
+    width: 100%;
     top: 0;
     right: 55px;
     @include tablet-min{
       position: relative;
-      height: 75px;
+      height: 50px;
       right: 0;
     }
     &-input{
@@ -218,19 +217,9 @@ img{
       padding: 15px 20px 15px 45px;
       outline: none;
       border: 0;
-      background-color: transparent;
       color: #000;
       font-weight: 300;
-      font-size: 16px;
-      @include tablet-min{
-        padding: 15px 30px 15px 60px;
-      }
-      @include tablet-landscape-min{
-        padding: 15px 30px 15px 80px;
-      }
-      @include desktop-min{
-        padding: 15px 30px 15px 90px;
-      }
+      font-size: 16px
     }
     &-icon{
       width: 14px;
@@ -242,18 +231,6 @@ img{
       top: 50%;
       margin-top: -7px;
       left: 20px;
-      @include tablet-min{
-        width: 18px;
-        height: 18px;
-        margin-top: -9px;
-        left: 30px;
-      }
-      @include tablet-landscape-min{
-        left: 50px;
-      }
-      @include desktop-min{
-        left: 60px;
-      }
     }
     &-input:focus + &-icon{
       fill: $c-dark;
@@ -307,4 +284,5 @@ img{
 .fade-enter, .fade-leave-active {
   opacity: 0
 }
+
 </style>

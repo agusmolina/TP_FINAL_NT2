@@ -51,7 +51,7 @@ export default {
     &__title{
       font-size: 24px;
       font-weight: 500;
-      color: $c-dark;
+      color: #fff;
       position: relative;
       margin: 0;
       @include tablet-min{

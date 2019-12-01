@@ -1,17 +1,24 @@
 <template>
   <nav class="nav">
-    <router-link class="nav__logo" :to="{name: 'home'}" exact title="Vue.js — TMDb App">
-      <svg class="nav__logo-image">
-        <use xlink:href="#svgLogo"></use>
-      </svg>
-    </router-link>
+    <table>
     <div class="nav__hamburger" @click="toggleNav">
       <div class="bar"></div>
       <div class="bar"></div>
       <div class="bar"></div>
     </div>
-    <ul class="nav__list">
-      <li class="nav__item" v-for="item in listTypes" v-if="item.isCategory">
+    <tr class="nav__list">
+      <td class="nav__item">
+        <router-link class="nav__link" :to="{name: 'home'}" exact title="FakeFlix">
+      <div class="nav__link-wrap">
+            <svg class="nav__link-icon">
+              <use :xlink:href="'#svgLogo'"></use>
+            </svg>
+            <span class="nav__link-title">Home</span>
+          </div>
+    </router-link>
+      </td>
+
+      <td class="nav__item" v-for="item in listTypes" v-if="item.isCategory">
         <router-link class="nav__link" :to="{name: 'home-category', params: {category: item.query}}">
           <div class="nav__link-wrap">
             <svg class="nav__link-icon">
@@ -20,26 +27,10 @@
             <span class="nav__link-title">{{ item.shortTitle }}</span>
           </div>
         </router-link>
-      </li>
-      <li class="nav__item nav__item--profile">
-        <div  class="nav__link nav__link--profile"  @click="requestToken" v-if="!userLoggedIn">
-          <div class="nav__link-wrap">
-            <svg class="nav__link-icon">
-              <use xlink:href="#iconLogin"></use>
-            </svg>
-            <span class="nav__link-title">Log In</span>
-          </div>
-        </div>
-        <router-link  class="nav__link nav__link--profile" :to="{name: 'profile'}" v-if="userLoggedIn">
-          <div class="nav__link-wrap">
-            <svg class="nav__link-icon">
-              <use xlink:href="#iconLogin"></use>
-            </svg>
-            <span class="nav__link-title">Profile</span>
-          </div>
-        </router-link>
-      </li>
-    </ul>
+      </td>
+
+    </tr>
+    </table>
   </nav>
 </template>
 
@@ -96,25 +87,35 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #0000ff;
+    color: #ffffff;
     background: $c-dark;
     @include tablet-min{
       width: 95px;
       height: 75px;
-    }
+    
     &-image{
       width: 35px;
       height: 31px;
-      fill: $c-green;
+      fill: $c-white;
       transition: transform 0.5s ease;
       @include tablet-min{
         width: 45px;
         height: 40px;
       }
     }
-    &:hover &-image{
+    &:hover &-image {
       transform: scale(1.04);
+      fill: $c-green;
     }
+    &.is-active &-image{
+      color: $c-green;
+      fill: $c-green;
+      background: $c-light;
+    }
+    &.is-active &-icon{
+      fill: $c-green;
+    }
+  }
   }
   &__hamburger{
     display: block;
@@ -177,6 +178,7 @@ export default {
   }
   &__list{
     list-style: none;
+    fill: $c-green;
     padding: 0;
     margin: 0;
     color: #fff;
@@ -189,6 +191,7 @@ export default {
     border-top: 1px solid $c-light;
     @include mobile-only{
       font-size: 0;
+      fill: $c-green;
       opacity: 0;
       visibility: hidden;
       height: calc(100vh - 50px);
@@ -201,6 +204,7 @@ export default {
     }
     @include tablet-min{
       display: flex;
+      fill: $c-green;
       background: transparent;
       position: relative;
       display: block;
@@ -212,16 +216,16 @@ export default {
   &__item{
     @include mobile-only{
       display: inline-block;
+      fill: $c-green;
       text-align: center;
       width: 50%;
-      border-bottom: 1px solid $c-light;
       &:nth-child(odd){
         border-right: 1px solid $c-light;
       }
     }
     @include tablet-min{
       width: 100%;
-      border-bottom: 1px solid $c-light;
+      fill: $c-green;
       &--profile{
         position: fixed;
         right: 0;
@@ -235,6 +239,7 @@ export default {
   }
   &__link{
     width: 100%;
+    fill: $c-green;
     color: #fff;
     display: flex;
     flex-wrap: wrap;
@@ -250,10 +255,12 @@ export default {
     cursor: pointer;
     @include mobile-only{
       font-size: 10px;
+      fill: $c-green;
       padding: 20px 0;
     }
     @include tablet-min{
       width: 95px;
+      fill: $c-green;
       height: 95px;
       font-size: 9px;
       &--profile{
@@ -265,8 +272,8 @@ export default {
     &-icon{
       width: 20px;
       height: 20px;
+      fill: $c-white;
       margin-bottom: 3px;
-      fill: rgba($c-dark, 0.7);
       transition: fill 0.5s ease;
       @include tablet-min{
         width: 20px;
@@ -274,6 +281,7 @@ export default {
         margin-bottom: 5px;
       }
     }
+
     &-title{
       display: block;
       width: 100%;
@@ -285,11 +293,11 @@ export default {
       fill: $c-green;
     }
     &.is-active{
-      color: $c-green;
-      background: $c-light;
+      color: $c-white;
+      background: rgba($c-green, 0.5);
     }
     &.is-active &-icon{
-      fill: $c-green;
+      fill: $c-white;
     }
   }
 }

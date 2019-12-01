@@ -7,29 +7,26 @@
             <h1 class="movie__title-text">
               {{ movie.title }}
               <span v-if="movie.tagline">{{ movie.tagline }}</span>
-              <div class="movie__details-text">
-                  Valoracion: {{ movie.vote_average }}
+              <div class="movie__details-texth">
+                  Valoracion:  ★ {{ movie.vote_average }}
                 </div>
             </h1>
-          </div><figure class="movie__poster">
+          </div>
+          <figure class="movie__poster">
             <img v-if="moviePosterSrc" class="movie__img" src="~assets/placeholder.png" v-img="moviePosterSrc">
             <img v-if="!moviePosterSrc" class="movies-item__img is-loaded" src="~assets/no-image.png">
           </figure>
+          <div v-if="trailer.results.length" class="movie__trailer">
+                <h2 class="movie__details-title">
+                  Trailer
+                </h2>
+                <iframe width="350" height="196" :src='"https://www.youtube.com/embed/" + (trailer.results[0].key)' frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
           
         </div>
       </header>
       <div class="movie__main">
         <div class="movie__wrap movie__wrap--main" :class="{'movie__wrap--page': type=='page'}">
-          <div class="movie__actions" v-if="userLoggedIn && favoriteChecked">
-            <a href="#" class="movie__actions-link" :class="{'active' : favorite === true}" @click.prevent="toggleFavorite">
-              <svg class="movie__actions-icon" :class="{'waiting' : favorite === ''}">
-                <use xlink:href="#iconFavorite"></use>
-              </svg>
-              <span class="movie__actions-text" v-if="favorite === ''">Wait...</span>
-              <span class="movie__actions-text" v-else-if="favorite">Marked as Favorite</span>
-              <span class="movie__actions-text" v-else>Mark as Favorite?</span>
-            </a>
-          </div>
           <div class="movie__info">
             <div v-if="movie.overview" class="movie__description">
               {{ movie.overview }}
@@ -47,9 +44,55 @@
                 <h2 class="movie__details-title">
                   Reparto
                 </h2>
-                <div class="movie__details-text">
-                  //Listado de Actores//
-                </div>
+
+            <div class="movie__details-text">
+              <table >
+                <tr>
+                  <td>
+                    <img v-bind:src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + reparto.cast[0].profile_path" width="100" height="150" /> 
+                  </td>
+                  <td>
+                    <img v-bind:src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + reparto.cast[1].profile_path" width="100" height="150" /> 
+                  </td>
+                  <td>
+                    <img v-bind:src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + reparto.cast[2].profile_path" width="100" height="150" /> 
+                  </td>
+                </tr>
+                <tr>
+                  <td height="50px" width="110px">
+                    {{ reparto.cast[0].name}}
+                  </td>
+                  <td height="50px" width="110px">
+                    {{ reparto.cast[1].name}}
+                  </td>
+                  <td height="50px" width="110px"> 
+                    {{ reparto.cast[2].name}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <img v-bind:src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + reparto.cast[3].profile_path" width="100" height="150" /> 
+                  </td>
+                  <td>
+                    <img v-bind:src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + reparto.cast[4].profile_path" width="100" height="150" /> 
+                  </td>
+                  <td>
+                    <img v-bind:src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + reparto.cast[5].profile_path" width="100" height="150" /> 
+                  </td>
+                </tr>
+                <tr>
+                  <td height="50px" width="110px">
+                    {{ reparto.cast[3].name}}
+                  </td>
+                  <td height="50px" width="110px">
+                    {{ reparto.cast[4].name}}
+                  </td>
+                  <td height="50px" width="110px">
+                    {{ reparto.cast[5].name}}
+                  </td>
+                </tr>
+              </table>
+            </div>
               </div>
               <div v-if="movie.release_date" class="movie__details-block">
                 <h2 class="movie__details-title">
@@ -61,10 +104,11 @@
                 <h2 class="movie__details-title">
                   Web Oficial
                 </h2>
-                <div class="movie__details-text">
-                  <a href="movie.homepage" style="color:white">{{ movie.homepage }}</a>
+                <div v-if="movie.homepage.length" class="movie__details-text">
+                  <a :href="movie.homepage" style="color:white">Ir al sitio oficial</a>
                 </div>
               </div>
+              
             </div>
           </div>
         </div>
@@ -88,6 +132,9 @@ export default {
   data(){
     return{
       movie: {},
+      reparto: {},
+      trailer: {},
+      trailerurl: "",
       movieLoaded: false,
       moviePosterSrc: '',
       movieBackdropSrc: '',
@@ -110,11 +157,17 @@ export default {
           this.movie = movie;
           this.poster();
           this.backdrop();
-          if(this.userLoggedIn){
-            this.checkIfInFavorites(movie.id);
-          } else {
-            this.movieLoaded = true;
-          }
+          axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${storage.apiKey}`)
+          .then(function(resp){
+            let reparto = resp.data;
+            this.reparto = reparto;
+          }.bind(this))
+          axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${storage.apiKey}&language=en-US`)
+          .then(function(resp){
+            let trailer = resp.data;
+            this.trailer = trailer;
+          }.bind(this))
+          this.movieLoaded = true;          
           // Push state
           if(storage.createMoviePopup){
             storage.moviePath = '/movie/' + id;
@@ -144,26 +197,10 @@ export default {
       resultString = nestedArray.join(', ');
       return resultString;
     },
-    checkIfInFavorites(id){
-      axios.get(`https://api.themoviedb.org/3/movie/${id}/account_states?api_key=${storage.apiKey}&session_id=${storage.sessionId}`)
-      .then(function(resp){
-          this.favorite = resp.data.favorite;
-          this.favoriteChecked = true;
-          this.movieLoaded = true;
-      }.bind(this))
-    },
-    toggleFavorite(){
-      let favoriteInvert = !this.favorite;
-      this.favorite = '';
-      axios.post(`https://api.themoviedb.org/3/account/${storage.userId}/favorite?api_key=${storage.apiKey}&session_id=${storage.sessionId}`, {
-        'media_type': 'movie',
-        'media_id': this.id,
-        'favorite': favoriteInvert
-      })
-      .then(function(resp){
-        this.favorite = favoriteInvert;
-        eventHub.$emit('updateFavorite');
-      }.bind(this));
+        nestedDataToStringss(data) {
+      let nestedArray = [];
+      data.forEach((item) => nestedArray.push('https://image.tmdb.org/t/p/w600_and_h900_bestv2' + item.profile_path));
+      return nestedArray;
     }
   },
   watch: {
@@ -235,6 +272,17 @@ export default {
         left: 40px;
       }
     }
+    &__trailer{
+      display: none;
+      @include tablet-min{
+        background: $c-dark;
+        display: block;
+        position: absolute;
+        width: calc(45% - 40px);
+        top: 550px;
+        left: 20px;
+      }
+    }
       &__img{
         display: block;
         width: 100%;
@@ -249,7 +297,7 @@ export default {
     &__title{
       position: relative;
       padding: 20px;
-      color: $c-green;
+      color: $c-white;
       text-align: center;
       width: 100%;
       @include tablet-min{
@@ -374,7 +422,15 @@ export default {
         }
         &-text{
           font-weight: 300;
-          font-size: 14px;
+          font-size: 16px;
+          margin-top: 5px;
+        }
+        &-texth{
+          font-weight: 300;
+          color: $c-green;
+          font-size: 16px;
+          background: rgba($c-dark, 0.5);
+          width: 150px;
           margin-top: 5px;
         }
       }

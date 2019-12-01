@@ -20,7 +20,7 @@ export default {
     }
   },
   created(){
-    document.title = 'TMDb';
+    document.title = 'FakeFlix';
     storage.backTitle = document.title;
   }
 }

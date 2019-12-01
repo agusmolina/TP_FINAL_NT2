@@ -12,14 +12,13 @@
         <movies-list-item class="movies__item" v-for="(movie, index) in movies" :movie="movie"></movies-list-item>
       </ul>
       <div class="movies__nav" v-if="!shortList" :class="{'is-hidden' : currentPage == pages}">
-        <button @click="loadMore" class="button">Cargar mas</button>
+        <button @click="loadMore">Cargar mas</button>
       </div>
     </div>
     <i v-if="!listLoaded" class="loader"></i>
     <section v-if="!movies.length" class="not-found">
       <div class="not-found__content">
         <h2 class="not-found__title" v-if="mode == 'search'">Ninguna pelicula conicide con ese nombre. Intente nuevamente.</h2>
-        <h2 class="not-found__title" v-if="mode == 'favorite'">You haven't added any favorite movies</h2>
       </div>
     </section>
   </div>
