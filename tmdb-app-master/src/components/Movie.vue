@@ -16,13 +16,12 @@
             <img v-if="moviePosterSrc" class="movie__img" src="~assets/placeholder.png" v-img="moviePosterSrc">
             <img v-if="!moviePosterSrc" class="movies-item__img is-loaded" src="~assets/no-image.png">
           </figure>
-          <div v-if="trailer.results.length" class="movie__trailer">
-                <h2 class="movie__details-title">
-                  Trailer
-                </h2>
-                <iframe width="350" height="196" :src='"https://www.youtube.com/embed/" + (trailer.results[0].key)' frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              </div>
-          
+          <div v-if="images.backdrops.length" class="movie__images">
+            <h2 class="movie__details-title">
+              Imagenes
+            </h2>
+            <img v-for="i in 5" v-bind:src="'https://image.tmdb.org/t/p/w300' + images.backdrops[i].file_path" vspace="10"/>
+          </div>
         </div>
       </header>
       <div class="movie__main">
@@ -40,22 +39,27 @@
                   {{ nestedDataToString(movie.genres) }}
                 </div>
               </div>
+              <div v-if="trailer.results.length" class="movie__trailer">
+                <h2 class="movie__details-title">
+                  Trailer
+                </h2>
+                <iframe width="350" height="196" :src='"https://www.youtube.com/embed/" + (trailer.results[0].key)' frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
               <div v-if="movie.genres.length" class="movie__details-block">
                 <h2 class="movie__details-title">
                   Reparto
                 </h2>
-
             <div class="movie__details-text">
               <table >
                 <tr>
                   <td>
-                    <img v-bind:src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + reparto.cast[0].profile_path" width="100" height="150" /> 
+                    <img v-bind:src="'https://image.tmdb.org/t/p/w300' + reparto.cast[0].profile_path" width="100" height="150" /> 
                   </td>
                   <td>
-                    <img v-bind:src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + reparto.cast[1].profile_path" width="100" height="150" /> 
+                    <img v-bind:src="'https://image.tmdb.org/t/p/w300' + reparto.cast[1].profile_path" width="100" height="150" /> 
                   </td>
                   <td>
-                    <img v-bind:src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + reparto.cast[2].profile_path" width="100" height="150" /> 
+                    <img v-bind:src="'https://image.tmdb.org/t/p/w300' + reparto.cast[2].profile_path" width="100" height="150" /> 
                   </td>
                 </tr>
                 <tr>
@@ -71,13 +75,13 @@
                 </tr>
                 <tr>
                   <td>
-                    <img v-bind:src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + reparto.cast[3].profile_path" width="100" height="150" /> 
+                    <img v-bind:src="'https://image.tmdb.org/t/p/w300' + reparto.cast[3].profile_path" width="100" height="150" /> 
                   </td>
                   <td>
-                    <img v-bind:src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + reparto.cast[4].profile_path" width="100" height="150" /> 
+                    <img v-bind:src="'https://image.tmdb.org/t/p/w300' + reparto.cast[4].profile_path" width="100" height="150" /> 
                   </td>
                   <td>
-                    <img v-bind:src="'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + reparto.cast[5].profile_path" width="100" height="150" /> 
+                    <img v-bind:src="'https://image.tmdb.org/t/p/w300' + reparto.cast[5].profile_path" width="100" height="150" /> 
                   </td>
                 </tr>
                 <tr>
@@ -134,6 +138,7 @@ export default {
       movie: {},
       reparto: {},
       trailer: {},
+      images: {},
       trailerurl: "",
       movieLoaded: false,
       moviePosterSrc: '',
@@ -167,6 +172,11 @@ export default {
             let trailer = resp.data;
             this.trailer = trailer;
           }.bind(this))
+          axios.get(`https://api.themoviedb.org/3/movie/${id}/images?api_key=${storage.apiKey}`)
+          .then(function(resp){
+            let images = resp.data;
+            this.images = images;
+          }.bind(this))
           this.movieLoaded = true;          
           // Push state
           if(storage.createMoviePopup){
@@ -197,11 +207,7 @@ export default {
       resultString = nestedArray.join(', ');
       return resultString;
     },
-        nestedDataToStringss(data) {
-      let nestedArray = [];
-      data.forEach((item) => nestedArray.push('https://image.tmdb.org/t/p/w600_and_h900_bestv2' + item.profile_path));
-      return nestedArray;
-    }
+
   },
   watch: {
     id: function(val){
@@ -277,10 +283,19 @@ export default {
       @include tablet-min{
         background: $c-dark;
         display: block;
+        position: relative;
+        width: calc(45% - 40px);
+      }
+    }
+    &__images{
+      display: none;
+      @include tablet-min{
+        background: $c-dark;
+        display: block;
         position: absolute;
         width: calc(45% - 40px);
         top: 550px;
-        left: 20px;
+        left: 40px;
       }
     }
       &__img{
