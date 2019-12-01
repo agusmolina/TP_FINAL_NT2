@@ -124,7 +124,40 @@
                   <a :href="movie.homepage" style="color:white">Ir al sitio oficial</a>
                 </div>
               </div>
-              
+              <div v-if="similars.results.length > 2" class="movie__details-block">
+                <h2 class="movie__details-title">
+                  Peliculas Similares
+                </h2>
+            <div class="movie__details-text">
+              <table >
+                <tr>
+                  <td>
+                    <a :href='similars.results[0].id' v-if="similars.results[0].poster_path != null"><img v-bind:src="'https://image.tmdb.org/t/p/w300' + similars.results[0].poster_path" width="100" height="150" /></a>
+                    <a :href='similars.results[0].id' v-else ><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSTOn1wc5wnr6xNWaryqEXsmiNwaQKl9MOiTm-NkEU8Vb8dgkyy" width="100" height="150" /></a>
+                  </td>
+                  <td>
+                    <a :href='similars.results[1].id' v-if="similars.results[1].poster_path != null"><img v-bind:src="'https://image.tmdb.org/t/p/w300' + similars.results[1].poster_path" width="100" height="150" /></a>
+                    <a :href='similars.results[1].id' v-else ><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSTOn1wc5wnr6xNWaryqEXsmiNwaQKl9MOiTm-NkEU8Vb8dgkyy" width="100" height="150" /></a>
+                  </td>
+                  <td>
+                    <a :href='similars.results[2].id' v-if="similars.results[2].poster_path != null"><img v-bind:src="'https://image.tmdb.org/t/p/w300' + similars.results[2].poster_path" width="100" height="150" /></a>
+                    <a :href='similars.results[2].id' v-else ><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSTOn1wc5wnr6xNWaryqEXsmiNwaQKl9MOiTm-NkEU8Vb8dgkyy" width="100" height="150" /></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td height="50px" width="110px">
+                    <a :href='similars.results[0].id' style="color:white">{{ similars.results[0].title}}</a>
+                  </td>
+                  <td height="50px" width="110px">
+                    <a :href='similars.results[1].id' style="color:white">{{ similars.results[1].title}}</a>
+                  </td>
+                  <td height="50px" width="110px"> 
+                    <a :href='similars.results[2].id' style="color:white">{{ similars.results[2].title}}</a>
+                  </td>
+                </tr>
+              </table>
+            </div>
+              </div>
             </div>
           </div>
         </div>
@@ -151,6 +184,7 @@ export default {
       reparto: {},
       trailer: {},
       images: {},
+      similars: {},
       trailerurl: "",
       movieLoaded: false,
       moviePosterSrc: '',
@@ -188,6 +222,11 @@ export default {
           .then(function(resp){
             let images = resp.data;
             this.images = images;
+          }.bind(this))
+          axios.get(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=${storage.apiKey}&language=es-ES&page=1`)
+          .then(function(resp){
+            let similars = resp.data;
+            this.similars = similars;
           }.bind(this))
           this.movieLoaded = true;          
           // Push state
