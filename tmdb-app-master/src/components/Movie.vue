@@ -16,11 +16,17 @@
             <img v-if="moviePosterSrc" class="movie__img" src="~assets/placeholder.png" v-img="moviePosterSrc">
             <img v-if="!moviePosterSrc" class="movies-item__img is-loaded" src="~assets/no-image.png">
           </figure>
-          <div v-if="images.backdrops.length" class="movie__images">
+          <div v-if="images.backdrops.length > 5" class="movie__images">
             <h2 class="movie__details-title">
               Imagenes
             </h2>
             <img v-for="i in 5" v-bind:src="'https://image.tmdb.org/t/p/w300' + images.backdrops[i].file_path" vspace="10"/>
+          </div>
+          <div v-else-if="images.backdrops.length > 0" class="movie__images">
+            <h2 class="movie__details-title">
+              Imagenes
+            </h2>
+            <img  v-bind:src="'https://image.tmdb.org/t/p/w300' + images.backdrops[0].file_path" vspace="10"/>
           </div>
         </div>
       </header>
@@ -31,7 +37,7 @@
               {{ movie.overview }}
             </div>
             <div class="movie__details">
-              <div v-if="movie.genres.length" class="movie__details-block">
+              <div v-if="movie.genres.length > 1" class="movie__details-block">
                 <h2 class="movie__details-title">
                   Generos
                 </h2>
@@ -39,13 +45,13 @@
                   {{ nestedDataToString(movie.genres) }}
                 </div>
               </div>
-              <div v-if="trailer.results.length" class="movie__trailer">
+              <div v-if="trailer.results.length > 0" class="movie__trailer">
                 <h2 class="movie__details-title">
                   Trailer
                 </h2>
                 <iframe width="350" height="196" :src='"https://www.youtube.com/embed/" + (trailer.results[0].key)' frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
               </div>
-              <div v-if="movie.genres.length" class="movie__details-block">
+              <div v-if="reparto.cast.length > 6" class="movie__details-block">
                 <h2 class="movie__details-title">
                   Reparto
                 </h2>
@@ -53,13 +59,16 @@
               <table >
                 <tr>
                   <td>
-                    <img v-bind:src="'https://image.tmdb.org/t/p/w300' + reparto.cast[0].profile_path" width="100" height="150" /> 
+                    <img v-if="reparto.cast[0].profile_path != null" v-bind:src="'https://image.tmdb.org/t/p/w300' + reparto.cast[0].profile_path" width="100" height="150" />
+                    <img v-else src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSTOn1wc5wnr6xNWaryqEXsmiNwaQKl9MOiTm-NkEU8Vb8dgkyy" width="100" height="150" />
                   </td>
                   <td>
-                    <img v-bind:src="'https://image.tmdb.org/t/p/w300' + reparto.cast[1].profile_path" width="100" height="150" /> 
+                    <img v-if="reparto.cast[1].profile_path != null" v-bind:src="'https://image.tmdb.org/t/p/w300' + reparto.cast[1].profile_path" width="100" height="150" />
+                    <img v-else src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSTOn1wc5wnr6xNWaryqEXsmiNwaQKl9MOiTm-NkEU8Vb8dgkyy" width="100" height="150" />
                   </td>
                   <td>
-                    <img v-bind:src="'https://image.tmdb.org/t/p/w300' + reparto.cast[2].profile_path" width="100" height="150" /> 
+                    <img v-if="reparto.cast[2].profile_path != null" v-bind:src="'https://image.tmdb.org/t/p/w300' + reparto.cast[2].profile_path" width="100" height="150" />
+                    <img v-else src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSTOn1wc5wnr6xNWaryqEXsmiNwaQKl9MOiTm-NkEU8Vb8dgkyy" width="100" height="150" />
                   </td>
                 </tr>
                 <tr>
@@ -75,13 +84,16 @@
                 </tr>
                 <tr>
                   <td>
-                    <img v-bind:src="'https://image.tmdb.org/t/p/w300' + reparto.cast[3].profile_path" width="100" height="150" /> 
+                    <img v-if="reparto.cast[3].profile_path != null" v-bind:src="'https://image.tmdb.org/t/p/w300' + reparto.cast[3].profile_path" width="100" height="150" />
+                    <img v-else src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSTOn1wc5wnr6xNWaryqEXsmiNwaQKl9MOiTm-NkEU8Vb8dgkyy" width="100" height="150" />
                   </td>
                   <td>
-                    <img v-bind:src="'https://image.tmdb.org/t/p/w300' + reparto.cast[4].profile_path" width="100" height="150" /> 
+                    <img v-if="reparto.cast[4].profile_path != null" v-bind:src="'https://image.tmdb.org/t/p/w300' + reparto.cast[4].profile_path" width="100" height="150" />
+                    <img v-else src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSTOn1wc5wnr6xNWaryqEXsmiNwaQKl9MOiTm-NkEU8Vb8dgkyy" width="100" height="150" />
                   </td>
                   <td>
-                    <img v-bind:src="'https://image.tmdb.org/t/p/w300' + reparto.cast[5].profile_path" width="100" height="150" /> 
+                    <img v-if="reparto.cast[5].profile_path != null" v-bind:src="'https://image.tmdb.org/t/p/w300' + reparto.cast[5].profile_path" width="100" height="150" />
+                    <img v-else src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSTOn1wc5wnr6xNWaryqEXsmiNwaQKl9MOiTm-NkEU8Vb8dgkyy" width="100" height="150" />
                   </td>
                 </tr>
                 <tr>
@@ -104,11 +116,11 @@
                 </h2>
                 <div class="movie__details-text" v-formatDate="movie.release_date"></div>
               </div>
-              <div v-if="movie.genres.length" class="movie__details-block">
+              <div v-if="movie.homepage" class="movie__details-block">
                 <h2 class="movie__details-title">
                   Web Oficial
                 </h2>
-                <div v-if="movie.homepage.length" class="movie__details-text">
+                <div class="movie__details-text">
                   <a :href="movie.homepage" style="color:white">Ir al sitio oficial</a>
                 </div>
               </div>
