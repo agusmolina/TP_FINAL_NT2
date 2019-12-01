@@ -223,7 +223,7 @@ export default {
             let images = resp.data;
             this.images = images;
           }.bind(this))
-          axios.get(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=${storage.apiKey}&language=es-ES&page=1`)
+          axios.get(`https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${storage.apiKey}&language=es-ES&page=1`)
           .then(function(resp){
             let similars = resp.data;
             this.similars = similars;
