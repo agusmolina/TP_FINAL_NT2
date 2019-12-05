@@ -79,7 +79,7 @@ export default {
       transform: rotate(-45deg);
     }
     &:hover{
-      background: $c-green;
+      background: $c-red;
     }
   }
 }

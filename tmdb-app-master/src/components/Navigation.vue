@@ -8,7 +8,7 @@
     </div>
     <tr class="nav__list">
       <td class="nav__item">
-        <router-link class="nav__link" :to="{name: 'home'}" exact title="FakeFlix">
+        <router-link class="nav__link" :to="{name: 'home'}" exact title="MoviePedia">
       <div class="nav__link-wrap">
             <svg class="nav__link-icon">
               <use :xlink:href="'#svgLogo'"></use>
@@ -105,15 +105,15 @@ export default {
     }
     &:hover &-image {
       transform: scale(1.04);
-      fill: $c-green;
+      fill: $c-red;
     }
     &.is-active &-image{
-      color: $c-green;
-      fill: $c-green;
+      color: $c-red;
+      fill: $c-red;
       background: $c-light;
     }
     &.is-active &-icon{
-      fill: $c-green;
+      fill: $c-red;
     }
   }
   }
@@ -178,7 +178,7 @@ export default {
   }
   &__list{
     list-style: none;
-    fill: $c-green;
+    fill: $c-red;
     padding: 0;
     margin: 0;
     color: #fff;
@@ -191,7 +191,7 @@ export default {
     border-top: 1px solid $c-light;
     @include mobile-only{
       font-size: 0;
-      fill: $c-green;
+      fill: $c-red;
       opacity: 0;
       visibility: hidden;
       height: calc(100vh - 50px);
@@ -204,7 +204,7 @@ export default {
     }
     @include tablet-min{
       display: flex;
-      fill: $c-green;
+      fill: $c-red;
       background: transparent;
       position: relative;
       display: block;
@@ -216,7 +216,7 @@ export default {
   &__item{
     @include mobile-only{
       display: inline-block;
-      fill: $c-green;
+      fill: $c-red;
       text-align: center;
       width: 50%;
       &:nth-child(odd){
@@ -225,7 +225,7 @@ export default {
     }
     @include tablet-min{
       width: 100%;
-      fill: $c-green;
+      fill: $c-red;
       &--profile{
         position: fixed;
         right: 0;
@@ -239,7 +239,7 @@ export default {
   }
   &__link{
     width: 100%;
-    fill: $c-green;
+    fill: $c-red;
     color: #fff;
     display: flex;
     flex-wrap: wrap;
@@ -255,12 +255,12 @@ export default {
     cursor: pointer;
     @include mobile-only{
       font-size: 10px;
-      fill: $c-green;
+      fill: $c-red;
       padding: 20px 0;
     }
     @include tablet-min{
       width: 95px;
-      fill: $c-green;
+      fill: $c-red;
       height: 95px;
       font-size: 9px;
       &--profile{
@@ -287,14 +287,14 @@ export default {
       width: 100%;
     }
     &:hover{
-      color: $c-green;
+      color: $c-red;
     }
     &:hover &-icon{
-      fill: $c-green;
+      fill: $c-red;
     }
     &.is-active{
       color: $c-white;
-      background: rgba($c-green, 0.5);
+      background: rgba($c-red, 0.5);
     }
     &.is-active &-icon{
       fill: $c-white;

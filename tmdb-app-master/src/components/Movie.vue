@@ -438,7 +438,7 @@ export default {
         fill: rgba($c-dark, 0.75);
       }
       &-link.active &-icon{
-        fill: $c-green;
+        fill: $c-red;
       }
       &-text{
         display: block;
@@ -481,7 +481,7 @@ export default {
           font-weight: 400;
           text-transform: uppercase;
           font-size: 14px;
-          color: $c-green;
+          color: $c-red;
           @include tablet-min{
             font-size: 16px;
           }
@@ -493,7 +493,7 @@ export default {
         }
         &-texth{
           font-weight: 300;
-          color: $c-green;
+          color: $c-red;
           font-size: 16px;
           background: rgba($c-dark, 0.5);
           width: 150px;

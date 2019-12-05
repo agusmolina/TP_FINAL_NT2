@@ -172,7 +172,7 @@ img{
   top: 50%;
   width: 30px;
   &:after {
-    border: 5px solid $c-green;
+    border: 5px solid $c-red;
     border-radius: 50%;
     content: '';
     left: 10px;

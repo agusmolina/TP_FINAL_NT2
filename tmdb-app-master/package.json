@@ -1,8 +1,8 @@
 {
   "name": "tmdb-app",
-  "description": "The Movie Database app ",
+  "description": "MoviePedia, TP de Vue.js ",
   "version": "1.1.1",
-  "author": "Dmytro Barylo",
+  "author": "Maxi, Eli, Martin y el otro",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",

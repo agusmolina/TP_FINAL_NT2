@@ -20,7 +20,7 @@ export default {
     }
   },
   created(){
-    document.title = 'FakeFlix';
+    document.title = 'MoviePedia';
     storage.backTitle = document.title;
   }
 }
