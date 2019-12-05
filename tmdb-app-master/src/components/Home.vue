@@ -3,7 +3,7 @@
     <header class="home__header">
         <img src="~assets/header.jpg" width="800px">
     </header>
-    <movies-list v-for="item in listTypes" v-if="item.isCategory" :type="'component'" :mode="'collection'" :category="item.query" :shortList="true"></movies-list>
+    <movies-list v-for="item in listTypes" v-if="item.isCategory" :type="'component'" :mode="'collection'" :category="item.query" :shortList="true" ></movies-list>
   </section>
 </template>
 

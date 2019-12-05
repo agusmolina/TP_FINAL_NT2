@@ -80,6 +80,11 @@ export default {
     width: 95px;
     height: 100vh;
   }
+  @include mobile-only{
+    display: block;
+    width: 50px;
+    height: 50px;
+  }
   &__logo{
     display: block;
     width: 55px;
@@ -118,15 +123,14 @@ export default {
   }
   }
   &__hamburger{
-    display: block;
-    position: fixed;
+    position: relative;
     width: 55px;
     height: 50px;
     top: 0;
-    right: 0;
+    right: 1;
     cursor: pointer;
-    background: $c-white;
-    z-index: 10;
+    background: $c-dark;
+    z-index: 0;
     border-left: 1px solid $c-light;
     @include tablet-min{
       display: none;
@@ -135,7 +139,7 @@ export default {
       position: absolute;
       width: 23px;
       height: 1px;
-      background: red;
+      background: $c-red;
       transition: all 300ms ease;
       &:nth-child(1){
         left: 16px;
@@ -178,16 +182,17 @@ export default {
   }
   &__list{
     list-style: none;
-    fill: $c-red;
+    fill: $c-white;
     padding: 0;
     margin: 0;
     color: #fff;
     text-align: center;
     width: 100%;
+    height: 400px;
     position: fixed;
     left: 0;
     top: 50px;
-    background: rgba($c-white, 0.98);
+    background: rgba($c-dark, 0.75);
     border-top: 1px solid $c-light;
     @include mobile-only{
       font-size: 0;
@@ -280,6 +285,11 @@ export default {
         height: 20px;
         margin-bottom: 5px;
       }
+      @include mobile-only{
+      width: 20px;
+        height: 20px;
+        margin-bottom: 5px;
+    }
     }
 
     &-title{

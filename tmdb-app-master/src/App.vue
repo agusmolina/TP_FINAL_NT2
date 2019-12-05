@@ -200,6 +200,12 @@ img{
     border-bottom: 0;
     top: 0;
   }
+  @include mobile-only{
+    padding-left: 60px;
+    width: 100%;
+    padding-top: 0px;
+    height: 50px;
+}
   &__search{
     height: 50px;
     z-index: 5;
@@ -214,7 +220,7 @@ img{
     &-input{
       display: block;
       width: 100%;
-      padding: 15px 20px 15px 45px;
+      padding: 15px 0px 15px 45px;
       outline: none;
       border: 0;
       color: #000;

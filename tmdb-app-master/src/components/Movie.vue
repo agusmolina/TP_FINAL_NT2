@@ -45,7 +45,7 @@
                   {{ nestedDataToString(movie.genres) }}
                 </div>
               </div>
-              <div v-if="trailer.results.length > 0" class="movie__trailer">
+              <div v-if="trailer.results.length > 0" class="movie__trailer-block">
                 <h2 class="movie__details-title">
                   Trailer
                 </h2>
