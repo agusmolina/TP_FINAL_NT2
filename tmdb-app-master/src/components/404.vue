@@ -10,7 +10,7 @@
 import storage from '../storage.js'
 export default {
   created(){
-    document.title = 'Page Not Found' + storage.pageTitlePostfix;
+    document.title = 'Pagina no encontrada' + storage.pageTitlePostfix;
   }
 }
 </script>

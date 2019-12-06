@@ -6,7 +6,6 @@
         <button class="button" @click="logOut">Log Out</button>
       </header>
       <movies-list :type="'component'" :mode="'favorite'"></movies-list>
-      <!-- <created-lists></created-lists> -->
     </div>
     <section class="not-found" v-if="userLoggedIn === false">
       <div class="not-found__content">
@@ -21,7 +20,6 @@
 import axios from 'axios'
 import storage from '../storage.js'
 import MoviesList from './MoviesList.vue'
-// import CreatedLists from './CreatedLists.vue'
 
 export default {
   components: { MoviesList },

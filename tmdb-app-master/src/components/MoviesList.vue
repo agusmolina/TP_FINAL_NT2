@@ -185,7 +185,7 @@ export default {
     }
   }
     &__title{
-color: #fff;
+color: $c-white;
       margin: 0;
       font-size: 30px;
       line-height: 16px;
@@ -202,21 +202,21 @@ color: #fff;
    }
     &__link{
       font-size: 16px;
-      color: #ff0000;
+      color: $c-red;
       font-weight: 300;
       letter-spacing: 0.5px;
       text-decoration: none;
       transition: color 0.5s ease;
       &:after{
-        color: #ff0000;
+        color: $c-red;
         content: " →";
       }
       &:hover{
-        color: #ffffff;
+        color: $c-white;
       }
     }
   &__list{
-          color: #ff0000;
+          color: $c-red;
 
     padding: 0;
     margin: 0;

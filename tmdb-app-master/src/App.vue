@@ -46,7 +46,6 @@ export default {
     }
   },
   methods: {
-    // User Session Methods
     requestToken(){
       storage.sessionId = null;
       axios.get(`https://api.themoviedb.org/3/authentication/token/new?api_key=${storage.apiKey}`)
@@ -62,7 +61,6 @@ export default {
       storage.sessionId = localStorage.getItem('session_id') || null;
       storage.userId = localStorage.getItem('user_id') || null;
     },
-    // Movie Popup Methods
     openMoviePopup(id, newMoviePopup){
       if(newMoviePopup){
         storage.backTitle = document.title;
@@ -94,7 +92,6 @@ export default {
         history.replaceState(newState , null, storage.moviePath);
       }
     },
-    // Search Methods
     search(){
       if(!this.searchQuery.length) return;
       this.$router.push({ name: 'search', params: { query: this.queryForRouter }});
@@ -107,11 +104,9 @@ export default {
         this.searchQuery =  query ? query.replace(/\+/g, " ") : '';
       }
     },
-    // Router After Leave
     afterLeave(){
       document.querySelector('body').scrollTop = 0;
     },
-    // Detect if touch device
     isTouchDevice() {
       return 'ontouchstart' in document.documentElement;
     }
@@ -279,7 +274,6 @@ img{
 }
 
 
-// router view transition
 .fade-enter-active, .fade-leave-active {
   transition-property: opacity;
   transition-duration: 0.25s;

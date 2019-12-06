@@ -71,8 +71,8 @@ export default {
   left: 0;
   width: 100%;
   height: 50px;    
-  color: #fff;
-  background-color: #000000;
+  color: $c-white;
+  background-color: $c-dark;
   display: flex;
   z-index: 10;
   @include tablet-min{
@@ -92,7 +92,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff;
+    color: $c-white;
     background: $c-dark;
     @include tablet-min{
       width: 95px;
@@ -188,7 +188,7 @@ export default {
     color: #fff;
     text-align: center;
     width: 100%;
-    height: 400px;
+    height: 100px;
     position: fixed;
     left: 0;
     top: 50px;

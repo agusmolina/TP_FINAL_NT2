@@ -6,7 +6,7 @@
           <div class="movie__title">
             <h1 class="movie__title-text">
               {{ movie.title }}
-              <span v-if="movie.tagline">{{ movie.tagline }}</span>
+              <span v-if="movie.original_title">{{ movie.original_title }}</span>
               <div class="movie__details-texth">
                   Valoracion:  ★ {{ movie.vote_average }}
                 </div>
@@ -194,11 +194,7 @@ export default {
       favorite: ''
     }
   },
-  // computed: {
-  //   loaded(){
-  //     return this.movieLoaded ? true : false;
-  //   }
-  // },
+
   methods: {
     fetchMovie(id){
       axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${storage.apiKey}&language=es-ES`)
@@ -229,13 +225,13 @@ export default {
             this.similars = similars;
           }.bind(this))
           this.movieLoaded = true;          
-          // Push state
+          
           if(storage.createMoviePopup){
             storage.moviePath = '/movie/' + id;
             history.pushState({ popup: true }, null, storage.moviePath);
             storage.createMoviePopup = false;
           }
-          // Change Page title
+          
           document.title = this.movie.title + storage.pageTitlePostfix;
       }.bind(this))
       .catch(function(error) {
